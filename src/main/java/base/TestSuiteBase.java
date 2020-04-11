@@ -48,7 +48,7 @@ public class TestSuiteBase extends CoreTestLayer{
 		driver.quit();
 	}
 	
-	public void initTest(String browser) throws Exception{
+	public void initTest() throws Exception{
 
 		config = new Config();
 		common = new CommonMethods(driver);

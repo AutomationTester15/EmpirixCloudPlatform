@@ -8,12 +8,11 @@ import base.TestSuiteBase;
 
 public class LoginTest extends TestSuiteBase{
 	
-	@Parameters({ "browser" })
 	@Test
-	public void UserLogin(String browser) throws Exception {
+	public void UserLogin() throws Exception {
 		
         System.out.println("---- UserLogin order Flow test start now..........");      
-        initTest(browser);
+        initTest();
         userLogin.logIn(Config.username, Config.password);
 
 	}

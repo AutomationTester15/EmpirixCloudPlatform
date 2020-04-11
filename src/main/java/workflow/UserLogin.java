@@ -23,6 +23,6 @@ public class UserLogin extends LoginPage {
 		common.fnvisibledElementSendKeys(password, pwd);
 		common.fnVisibledElementClick(signIn);
 
-		log.info("User logged in to Ion Web : " + user);
+		log.info("User logged in to EmprixCloudPlatform : " + user);
 	}
 }
