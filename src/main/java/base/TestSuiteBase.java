@@ -5,11 +5,13 @@ import org.apache.log4j.PropertyConfigurator;
 import org.testng.annotations.*;
 import common.CommonMethods;
 import util.WebdriverProvider;
+import workflow.Dashboard;
 import workflow.UserLogin;
 
 public class TestSuiteBase extends WebdriverProvider{
 	
 	public UserLogin userLogin;
+	public Dashboard dashboard;
 	public Config config;
 	public CommonMethods common;
 	public static Logger log = Logger.getLogger(TestSuiteBase.class);
@@ -43,5 +45,6 @@ public class TestSuiteBase extends WebdriverProvider{
 		config = new Config();
 		common = new CommonMethods(driver);
 		userLogin = new UserLogin(driver, common);
+		dashboard = new Dashboard(driver, common);
 	}
 }

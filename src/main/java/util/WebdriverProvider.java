@@ -54,7 +54,7 @@ public class WebdriverProvider {
 	@AfterSuite
 	public void afterSuite_WebdriverProvider(){
 		log.info(" : WebdriverProvider - afterSuite called");
-		driver.quit();
+		//driver.quit();
 	}
 	
 	public synchronized WebDriver getWebDriverInstance(String browserName) throws MalformedURLException {
@@ -64,8 +64,9 @@ public class WebdriverProvider {
 			System.setProperty("webdriver.chrome.driver", Configs.chromeDriverPath);
 			DesiredCapabilities	caps = DesiredCapabilities.chrome();
 			driver =new ChromeDriver(caps);
-			
+			driver.manage().window().maximize();
 			driver.get("https://services.empirix.com/");
+			
 			log.info(" : Initialized the chrome driver");
 		}
 
