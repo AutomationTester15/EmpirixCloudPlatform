@@ -4,8 +4,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-import base.Constants;
-
 public class Config {
 	
 	public static String username = null;

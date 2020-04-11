@@ -14,7 +14,6 @@ public class Configs {
 	public static String ieDriverPath;
 	public static String edgeDriverPath;
 	public static String applicationURL;
-	public static String hubURL;
 	public static InputStream inputStream;
 	private static String propFileName = "app.properties";
 	static Logger log = Logger.getLogger(Configs.class);
@@ -42,7 +41,6 @@ public class Configs {
 				chromeDriverPath= Constants.chromeDriver_path+"chromedriver.exe";
 				firefoxDriverPath= Constants.firefoxDriver_path+"geckodriver.exe";
 				applicationURL = prop.getProperty("applicationURL");
-				hubURL = prop.getProperty("hubURL");
 			}
 
 		} catch (IOException e) {

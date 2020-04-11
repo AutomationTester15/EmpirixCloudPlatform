@@ -19,10 +19,11 @@ public class UserLogin extends LoginPage {
 	}
 
 	public void logIn(String user, String pwd) {
+		common.fnvisibledElementWithoutClick(userName);
 		common.fnvisibledElementSendKeys(userName, user);
 		common.fnvisibledElementSendKeys(password, pwd);
 		common.fnVisibledElementClick(signIn);
 
-		log.info("User logged in to EmprixCloudPlatform : " + user);
+		log.info("User logged in to Ion Web : " + user);
 	}
 }

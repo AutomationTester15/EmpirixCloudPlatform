@@ -6,6 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.log4testng.Logger;
 
 import base.Configs;
@@ -17,7 +22,8 @@ import base.Configs;
 
 public class WebdriverProvider {
 	
-	private WebDriver driver;
+	protected WebDriver driver;
+	String paramBrowser;
 	
 	static Logger log = Logger.getLogger(WebdriverProvider.class);
 	
@@ -26,21 +32,30 @@ public class WebdriverProvider {
 		PropertyConfigurator.configure("log4j.properties");
 		log.info(" : WebdriverProvider Constructor called");
 	}
-
-	/**
-	 * Takes the String browserName from the testng.xml and provide the respective webdriver instance.
-	 * Set the System.setProperty for driver type and locations to app.propeties driver path properties. like,
-	 * ChromeDriverPath, FirefoxDriverPath.
-	 * 
-	 * It supports the following drivers:
-	 * <ul>
-	 * <li> chrome </li>
-	 * <li> firefox </li>
-	 * </ul>
-	 * @param browserName browser name to initialize the webdriver
-	 * @return WebDriver returns the driver instance of the parameter type
-	 * @throws MalformedURLException if Hub URL is not valid
-	 */
+	
+	@BeforeSuite
+	public void beforeSuite_WebdriverProvider(){
+		log.info(" : WebdriverProvider - beforeSuite called");
+	}
+	
+	@Parameters({ "browser" })
+	@BeforeTest
+	public void beforeTest_WebdriverProvider(String browser) throws MalformedURLException {
+		log.info(" : WebdriverProvider - beforeTest called");
+		Configs.initConfigs();
+		driver = getWebDriverInstance(browser);
+	}
+	
+	@AfterTest
+	public void afterTest_WebdriverProvider(){
+		log.info(" : WebdriverProvider - afterTest called");
+	}
+	
+	@AfterSuite
+	public void afterSuite_WebdriverProvider(){
+		log.info(" : WebdriverProvider - afterSuite called");
+		driver.quit();
+	}
 	
 	public synchronized WebDriver getWebDriverInstance(String browserName) throws MalformedURLException {
 		log.info(" : getWebDriverInstance called");
@@ -51,13 +66,6 @@ public class WebdriverProvider {
 			driver =new ChromeDriver(caps);
 			
 			driver.get("https://services.empirix.com/");
-			try {
-				//TODO palce a proper event check, sleep is a workaround
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			log.info(" : Initialized the chrome driver");
 		}
 
@@ -66,10 +74,13 @@ public class WebdriverProvider {
 			DesiredCapabilities	caps = DesiredCapabilities.firefox();
 
 			driver=new FirefoxDriver(caps);
-			driver.get("https://services.empirix.com/");
-			
+			driver.get("https://services.empirix.com/");		
 			log.info(" : Initialized the firefox driver");
 		}
+		return driver;
+	}
+
+	public WebDriver getDriver(){
 		return driver;
 	}
 }
