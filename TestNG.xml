@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="TestSuite2" thread-count="3" parallel="tests">
+
+<parameter name="browser" value="chrome" />
+<test name="User login test, Change language test">
+
+	<classes>
+		<class name="testScripts.Tests">
+			<methods>
+				<include name="UserLogin" />
+				<include name="verifySwitchLanguages" />
+			</methods>
+		</class>
+	</classes>
+</test>
+
+</suite>
